@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
@@ -70,13 +71,13 @@ export const createUserDocumentFromAuth = async (
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
   try {
     const response = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
-    console.log(response);
     return response;
   } catch (error) {
     if (error.code === "auth/email-already-in-use") {
@@ -84,5 +85,15 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
     } else {
       console.log("error creating user", error.message);
     }
+  }
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  try {
+    const response = await signInWithEmailAndPassword(auth, email, password);
+    return response;
+  } catch (error) {
+    console.log("error creating user", error.message);
   }
 };
