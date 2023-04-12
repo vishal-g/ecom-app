@@ -3,9 +3,7 @@ import Home from "./routes/home/home.component";
 import Navigation from "./routes/navigation/navigation.component";
 import Authentication from "./routes/authentication/authentication.component";
 
-const Shop = () => {
-  return <h2>I am the Shop</h2>;
-};
+import Shop from "./routes/shop/shop.component";
 
 const App = () => {
   return (
